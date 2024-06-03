@@ -1,3 +1,5 @@
+github.com/beego/beego/v2 v2.2.1 h1:5RatpEOKnw6sm76hj6lQvEFi4Tco+E21VQomnVB7NsA=
+github.com/beego/beego/v2 v2.2.1/go.mod h1:X4hHhM2AXn0hN2tbyz5X/PD7v5JUdE4IihZApiljpNA=
 github.com/bytedance/sonic v1.11.8 h1:Zw/j1KfiS+OYTi9lyB3bb0CFxPJVkM17k1wyDG32LRA=
 github.com/bytedance/sonic v1.11.8/go.mod h1:LysEHSvpvDySVdC2f87zGWf6CIKJcAvqab1ZaiQtds4=
 github.com/bytedance/sonic/loader v0.1.1 h1:c+e5Pt1k/cy5wMveRDyk2X4B9hF4g7an8N3zCYjJFNM=
