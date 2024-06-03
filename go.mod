@@ -1,8 +1,9 @@
-module 42dotmk/hogwards-tech-aid
+module github.com/42dotmk/hogwards-tech-aid
 
 go 1.22.3
 
 require (
+	github.com/angelofallars/htmx-go v0.5.0 // indirect
 	github.com/bytedance/sonic v1.11.8 // indirect
 	github.com/bytedance/sonic/loader v0.1.1 // indirect
 	github.com/cloudwego/base64x v0.1.4 // indirect
