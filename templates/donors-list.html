@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+
+  <head>
+    <!--Use the title variable to set the title of the page-->
+    <title>{{ .title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+
+    <!-- packages -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.7.0" integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous" defer></script>
+    <meta name="robots" content="noindex">
+    
+
+  </head>
+
+  <body class="bg-gray-200 w-screen min-h-screen h-full flex flex-col">
+
+    <div class="mx-auto h-full max-w-xl px-3 w-full flex-grow">
+
+        {{ if eq .copyAlert true }}
+        <div x-data=" {show: true} " x-show="show" x-transition
+        class=" my-5 text-gray-600 font-medium flex mb-1 flex-row justify-between p-2 bg-gray-100 border-x-4 border-gray-500">
+            <div>⚠️ Warning! Save the URL if you want to acces this list later.</div>
+            <button x-on:click="show = ! show" 
+            class="flex items-center">✖️</button>
+        </div>
+        {{ end }}
+
+        <div x-data="{ open: false }" class="flex flex-row justify-between border-x-4 border-gray-500 my-3 p-3 bg-gray-100">
+
+            <div>
+
+                <button class="font-bold" x-transition:enter.duration.500ms x-show="!open" x-on:click="open = ! open"
+                @click="$nextTick(() => { setTimeout(() => { document.getElementById('input_cat').focus(); }, 300);});"
+                >+ Category</button>
+
+                <form class="flex" x-transition:enter.duration.500ms x-show="open" hx-post="/{{.list.Url}}/category" hx-target="#list" hx-swap="beforeend">
+                    <input type="text" name="name" id="input_cat" required
+                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-600 peer"
+                    >
+                    <button type="button" x-on:click="open = ! open">🔴</button>
+                    &nbsp;<button type="submit" x-on:click="open = ! open">🟢</button>
+                </form>
+
+            </div>
+
+            <button class="font-bold" id="copyUrl" value="{{.list.Url}}">
+                Copy URL 📋
+            </button>
+              
+        </div>
+
+        <div id="list">
+
+            {{ range .list.Categories}}
+    
+                {{ template "category.html" . }}
+                
+            {{end}}
+    
+        </div>
+
+        
+
+    </div>
+
+    <script>
+        const text = document.getElementById('copyUrl');
+ 
+        text.addEventListener('click', () => {
+
+            const value = event.target.value;
+            
+            try {
+                navigator.clipboard.writeText(value);
+
+            const original = text.textContent;
+            text.textContent = 'Copied!';
+            text.classList.add('text-green-600');
+
+            setTimeout(() => {
+                text.textContent = original;
+                text.classList.remove('text-green-600');
+            }, 1000);
+            } catch(e) {
+                alert('Oops, unable to copy');    
+            }
+        });
+    </script>
+
+    <script>
+
+        if (localStorage.getItem('lists') === null) {
+            lists = ['{{.list.Url}}']
+            localStorage.setItem('lists', JSON.stringify(lists));
+        } else {
+            var lists = JSON.parse(localStorage.getItem("lists"))
+            if ( !lists.includes('{{.list.Url}}')) {
+
+                list = lists.push('{{.list.Url}}')
+                localStorage.setItem("lists", JSON.stringify(lists));
+            }
+        }
+
+    </script>
+
+    
+
+    
+
+    
+
+{{ template "footer.html" .}}
