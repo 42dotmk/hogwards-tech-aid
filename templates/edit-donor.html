@@ -14,21 +14,23 @@
     <div class="space-y-2">
         <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
         <input type="text" name="Phone" id="phone" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            {{if .Donor}} value="{{.Donor.Name}}" {{end}}>
+            {{if .Donor}} value="{{.Donor.Phone}}" {{end}}>
     </div>
     <div class="space-y-2">
         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
         <input type="email" name="Email" id="email" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
-            {{if .Donor}} value="{{.Donor.Name}}" {{end}}>
+            {{if .Donor}} value="{{.Donor.Email}}" {{end}}>
     </div>
     <div class="space-y-2">
         <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
         <input type="text" name="Address" id="address" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            {{if .Donor}} value="{{.Donor.Name}}" {{end}}>
+            {{if .Donor}} value="{{.Donor.Address}}" {{end}}>
     </div>
     <div class="flex items-start">
         <div class="flex items-center h-5">
-            <input type="checkbox" name="IsAnonymous" id="isAnonymous" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+            <input type="checkbox" name="IsAnonymous" 
+            id="isAnonymous" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+            {{if .Donor.IsAnonymous}} checked {{end}} >
         </div>
         <div class="ml-3 text-sm">
             <label for="isAnonymous" class="font-medium text-gray-700">Is Anonymous</label>
@@ -36,7 +38,9 @@
     </div>
     <div class="flex items-start">
         <div class="flex items-center h-5">
-            <input type="checkbox" name="IsLegalEntity" id="isLegalEntity" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+            <input type="checkbox" name="IsLegalEntity" id="isLegalEntity" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+            {{if .Donor.IsLegalEntity}} checked {{end}}
+            >
         </div>
         <div class="ml-3 text-sm">
             <label for="isLegalEntity" class="font-medium text-gray-700">Is Legal Entity</label>
@@ -44,7 +48,8 @@
     </div>
     <div class="space-y-2">
         <label for="anonymousName" class="block text-sm font-medium text-gray-700">Anonymous Name</label>
-        <input type="text" name="AnonymousName" id="anonymousName" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        <input type="text" name="AnonymousName" id="anonymousName" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            {{if .Donor.AnonymousName}} value="{{.Donor.AnonymousName}}" {{end}}>
     </div>
     <button type="submit" class="w-full px-4 py-2 bg-indigo-600 text-white font-medium rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Submit</button>
 </form>

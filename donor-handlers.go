@@ -14,11 +14,11 @@ func BuildDonorRoutes(r *gin.RouterGroup) {
 	r.GET("/", ListDonors)
 	r.GET("/new", ShowDonorForm)
 	r.GET("/:id", ShowDonorDetails)
+	r.GET("/:id/edit", ShowDonorForm)
 	r.POST("/:id", UpsertDonor)
 	r.PUT("/", UpsertDonor)
 	r.DELETE("/:id", DeleteDonor)
 }
-
 func ListDonors(c *gin.Context) {
 	var donors []models.Donor
 	db.DB.Find(&donors)
