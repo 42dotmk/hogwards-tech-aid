@@ -9,7 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// DB SERVER (AWS)
+// DB SERVER CONN STR
 func sqlite_conn_str() string {
 	dbPath, isFound := os.LookupEnv("DB_PATH")
 	if !isFound {

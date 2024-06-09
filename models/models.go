@@ -52,15 +52,15 @@ type EquipmentItem struct {
 	ServicedMachineID uint
 	ServicedMachine   ServicedMachine
 
-	Tags []Tag
+    Tags []Tag `gorm:"many2many:equipment_tags;"`
 }
 
 type Tag struct {
 	Code            string `gorm:"primaryKey"`
 	Name            string
 	Description     string
-	EquipmentItemID uint
 }
+
 type Recipient struct {
 	gorm.Model
 	Name          string

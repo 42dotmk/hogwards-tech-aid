@@ -2,7 +2,6 @@ package main
 
 import (
 	"app/models"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 
@@ -11,11 +10,7 @@ import (
 	"github.com/ulule/limiter/v3/drivers/store/memory"
 )
 
-var router *gin.Engine
-
 func main() {
-
-	// IP RATE LIMITER
 	rate, err := limiter.NewRateFromFormatted("240-M")
 	if err != nil {
 		panic(err)
@@ -26,34 +21,22 @@ func main() {
 
 	models.Migrate()
 
-	router = gin.Default()
+	r := gin.Default()
 
-	router.ForwardedByClientIP = true
-	router.Use(middleware_iprate)
-
-	//templ := template.Must(template.New("").ParseFS(embeddedFiles, "templates/*"))
-	//router.SetHTMLTemplate(templ)
-	router.Static("/assets", "./assets")
-
-	router.LoadHTMLGlob("templates/*")
-
-	InitializeRoutes()
-
-	router.Run()
-
+	r.ForwardedByClientIP = true
+	r.Use(middleware_iprate)
+	r.Static("/assets", "./assets")
+	r.LoadHTMLGlob("templates/*")
+	InitializeRoutes(r)
+	r.Run()
 }
 
-// Render one of HTML or JSON based on the 'Accept' header of the request
-// If the header doesn't specify this, HTML is rendered, provided that
-// the template name is present
-func render(c *gin.Context, data gin.H, templateName string) {
+func InitializeRoutes(r *gin.Engine) {
+	r.GET("/", Home)
 
-	switch c.Request.Header.Get("Accept") {
-	case "application/json":
-		// Respond with JSON
-		c.JSON(http.StatusOK, data["payload"])
-	default:
-		// Respond with HTML
-		c.HTML(http.StatusOK, templateName, data)
-	}
+	BuildDonorRoutes(r.Group("/donors"))
+	r.GET("/donations", func(c *gin.Context) { hxRender(c, gin.H{}, "donations-list.html") })
+	r.GET("/inventory", func(c *gin.Context) { hxRender(c, gin.H{}, "inventory-list.html") })
+	r.GET("/configurations", func(c *gin.Context) { hxRender(c, gin.H{}, "configurations-list.html") })
+	r.GET("/team", func(c *gin.Context) { hxRender(c, gin.H{}, "team.html") })
 }

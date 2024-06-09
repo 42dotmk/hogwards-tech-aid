@@ -1,20 +1,51 @@
-<article x-transition class="py-2 hover:bg-gray-100" x-data=" {show: true} " x-show="show">
-    <div class="flex flex-row justify-between ml-2">
+<!--create a readonly display for a donor using tailwind and the go template syntax-->
+<!--the fields displayed are the following:
+	Name          string
+	Phone         string
+	Email         string
+	Address       string
+	IsAnonymous   bool
+	IsLegalEntity bool
+	AnonymousName string
+    Dontations    []Donation
+-->
+<!--if IsAnonymous is true than the email name , phone and address are hidden and only the anonymous name is displayed -->
+<article>
+    <h1 class="font-black">Донор</h1>
+    <div class="flex flex-col text-center py-5">
+        <div class="flex flex-col text-center py-5">
+            {{if .Donor.IsAnonymous}}
+            <div class="flex flex-row text-center py-5">
+                <label class="text-gray-700">Анонимно име:</label>
+                <p class="text-gray-900">{{.Donor.AnonymousName}}</p>
+            </div>
+            {{else}}
+            <div class="flex flex-row text-center py-5">
+                <label class="text-gray-700">Име:</label>
+                <p class="text-gray-900">{{.Donor.Name}}</p>
+            </div>
+            <div class="flex flex-row text-center py-5">
+                <label class="text-gray-700">Телефон:</label>
+                <p class="text-gray-900">{{.Donor.Phone}}</p>
+            </div>
+            <div class="flex flex-row text-center py-5">
+                <label class="text-gray-700">Е-пошта:</label>
+                <p class="text-gray-900">{{.Donor.Email}}</p>
+            </div>
+            <div class="flex flex-row text-center py-5">
+                <label class="text-gray-700">Адреса:</label>
+                <p class="text-gray-900">{{.Donor.Address}}</p>
+            </div>
+            {{end}}
 
-        <div>
-        <button x-on:click="show = false" class="hover:bg-gray-300" hx-patch="/{{.Url}}/item/{{.ID}}" hx-swap="afterbegin" hx-target="#Changes{{.CategoryID}}">
-            <input type="checkbox" class="w-4 h-4 text-green-600 bg-gray-100 rounded border-gray-300 focus:ring-green-500 focus:ring-2">
-        </button>
-        <span>{{.Name}}</span>
-    </div>
-
-        <div class="flex flex-row">   
-            <button class="text-sm text-green-700" x-data=" { time : timeSince( {{ .UpdatedAt }} )  }" x-text="time" x-init="setInterval(() => time = timeSince( {{ .UpdatedAt }} ), 10000)"></button>&nbsp;
-
-            &nbsp;<button x-on:click="show = false" class="hover:bg-gray-300" hx-delete="/{{.Url}}/item/{{.ID}}" hx-swap="afterbegin" hx-target="#Changes{{.CategoryID}}">
-                ✖️
-            </button> 
+            <div class="flex flex-row text-center py-5">
+                <label class="text-gray-700">Правно лице:</label>
+                <p class="text-gray-900">{{.Donor.IsLegalEntity}}</p>
+            </div>
+            <div class="flex flex-row text-center py-5">
+                <label class="text-gray-700">Донации:</label>
+                <p class="text-gray-900">{{.Donor.Donations}}</p>
+            </div>
         </div>
-    </div>
 </article>
 
