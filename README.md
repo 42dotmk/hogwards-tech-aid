@@ -12,9 +12,15 @@ BACKEND:
   - PostgreSQL: Database Engine, running on AWS RDS free tier instance.
   - [GORM](https://github.com/go-gorm/gorm): ORM for interacting with the database, used to increase simplicity and security.
   - [IP Limiter](https://github.com/ulule/limiter): IP Rate Limiter middleware. In-Memory cache used for increase security.
-  - Heroku: Server is running here, on a free dyno.
-  
+
 FRONTEND:
   - [HTMX](https://github.com/bigskysoftware/htmx): Used for adding reactivity without the need of refreshing the page. Acomplished sending and receiving AJAX request.
-  - [Alpinejs](https://github.com/tailwindlabs/tailwindcss): Adding js behaviour in HTML. In this case its just showing/hiding forms and interacting with localStorage.
-  - [TailwindCSS](https://github.com/tailwindlabs/tailwindcss): CSS framework for rapid UI development.
+- [TailwindCSS](https://github.com/tailwindlabs/tailwindcss): CSS framework for rapid UI development.
+
+## How to start developing further
+1. Clone the repo
+1. Install the live reload library with `go install https://github.com/codegangsta/gin`
+2. `go mod tidy` to install the dependencies
+3. `gin` to start the server, on every file change the server will rebuild
+
+
