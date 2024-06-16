@@ -1,36 +1,5 @@
 <section class="py-5 flex justify-center border-t border-gray-400 bottom-0.5">
     <p>website 🛠️ by Донирај компјутер + Б42</p>
 </section>
-
-<script>
-    document.body.addEventListener('htmx:afterRequest', (event) => {
-        var elements = document.getElementsByTagName("input");
-        for (var ii=0; ii < elements.length; ii++) {
-        if (elements[ii].type == "text" && elements[ii].classList.contains("iteminput")) {
-            elements[ii].value = "";
-        }
-        }
-
-        document.getElementById('input_cat').value = '';
-    })
-</script>
-
-<script>
-    function timeSince(date) {
-
-        now = Date.now();
-        seconds = now/1000 - date;
-
-        if (seconds < 60) {
-            return 'now'
-        } else if (seconds < 3600) {
-            return Math.floor(seconds/60) + "m"
-        } else if (seconds < 86400) {
-            return Math.floor(seconds/3600) + "h"
-        } else {
-            return Math.floor(seconds/86400) + "d"
-        }
-    }
-</script>
 </body>
 </html>

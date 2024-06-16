@@ -20,7 +20,6 @@ func main() {
 
 	rnd.HxRenderSetup(&rnd.HxConfig{
 		DefaultLayout: "home.html", //the default layout to use
-
 		//a function that is used to supply the layout with data, in this case the menu items
 		LayoutDataFunc: func(data gin.H) {
 			data["Menu"] = []rnd.MenuItem{

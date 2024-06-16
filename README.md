@@ -8,10 +8,8 @@ Technologies used in this project and why:
 
 BACKEND:
   - Go: The main programming language, the http server is running here.
-  - [Go Gin](https://github.com/gin-gonic/gin): Framework for simplify the code.
-  - PostgreSQL: Database Engine, running on AWS RDS free tier instance.
-  - [GORM](https://github.com/go-gorm/gorm): ORM for interacting with the database, used to increase simplicity and security.
-  - [IP Limiter](https://github.com/ulule/limiter): IP Rate Limiter middleware. In-Memory cache used for increase security.
+    - [Go Gin](https://github.com/gin-gonic/gin): Web Framework 
+    - [GORM](https://github.com/go-gorm/gorm): ORM for interacting with the database
 
 FRONTEND:
   - [HTMX](https://github.com/bigskysoftware/htmx): Used for adding reactivity without the need of refreshing the page. Acomplished sending and receiving AJAX request.
@@ -22,5 +20,6 @@ FRONTEND:
 1. Install the live reload library with `go install https://github.com/codegangsta/gin`
 2. `go mod tidy` to install the dependencies
 3. `gin` to start the server, on every file change the server will rebuild
+
 
 
