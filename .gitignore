@@ -1,5 +1,8 @@
+# files/folders I've seen that we don't want to commit
 db.sqlite
 gin-bin
+.idea/
+
 # Binaries for programs and plugins
 *.exe
 *.exe~
@@ -9,9 +12,6 @@ gin-bin
 
 # Output of the go build command
 *.out
-
-# Dependency directories (remove the comment below if you use dep)
-# vendor/
 
 # Compiled Object files, Static and Dynamic libs (remove the comment below if you use dep)
 *.o
