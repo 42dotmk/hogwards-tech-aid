@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/42dotmk/hogwards/db"
 	"github.com/42dotmk/hogwards/handlers"
-	rnd "github.com/42dotmk/hogwards/lib/renderers"
+	"github.com/42dotmk/hogwards/lib/renderers"
 	"github.com/42dotmk/hogwards/models"
 	"github.com/gin-gonic/gin"
 )
@@ -16,13 +16,14 @@ func main() {
 	app.Static("/assets", "./assets")
 	//tell gin where to search for templates
 	app.LoadHTMLGlob("templates/*")
-	// Setup the Htmx renderer defaults
 
-	rnd.HxRenderSetup(&rnd.HxConfig{
-		DefaultLayout: "home.html", //the default layout to use
+	// Setup the Htmx renderer defaults
+	hxConfig := renderers.NewConfig().
+		WithLayout("home.html"). //the default layout to use
+		WithEnableLayoutOnNonHxRequest(true). 
 		//a function that is used to supply the layout with data, in this case the menu items
-		LayoutDataFunc: func(data gin.H) {
-			data["Menu"] = []rnd.MenuItem{
+		WithLayoutDataFunc(func(data gin.H) {
+			data["Menu"] = []models.MenuItem{
 				{Title: "Home", Uri: "/", IsEnabled: true, IsExternal: true},
 				{Title: "Донори", Uri: "/donors", IsEnabled: true, IsExternal: false},
 				{Title: "Донации", Uri: "/donations", IsEnabled: true, IsExternal: false},
@@ -30,11 +31,12 @@ func main() {
 				{Title: "Опрема", Uri: "/equipment", IsEnabled: true, IsExternal: false},
 				{Title: "Конфигурации", Uri: "/bundles", IsEnabled: true, IsExternal: false},
 			}
-		},
-	})
+		})
+	renderers.DefaultRenderSetup(hxConfig)
+
 	//HANDLERS
 	//V0 just create a simple method handler for a simple route (the method can be pased as an argument it does not have to be a closure)
-	app.GET("/", func(c *gin.Context) { rnd.HxRender(c, gin.H{}, "home.html") })
+	app.GET("/", func(c *gin.Context) { renderers.Render(c, gin.H{}, "home.html") })
 
 	// v1. create a controller for the donor model hosted at /donors implementing all its routes there
 	// the positive aspect of this is that you can easily see all the routes for the donor model in one place

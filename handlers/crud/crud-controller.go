@@ -56,7 +56,7 @@ func (self *CrudCtrl[T]) DefineRoutes(r *gin.RouterGroup) *CrudCtrl[T] {
 func (self *CrudCtrl[T]) List(c *gin.Context) {
 	var items []T
 	self.Db.Find(&items)
-	rnd.HxRender(c,
+	rnd.Render(c,
 		gin.H{fmt.Sprintf("%sList", self.ModelName): items},
 		fmt.Sprintf("%s-list.html", self.ModelName))
 }
@@ -68,7 +68,7 @@ func (self *CrudCtrl[T]) Details(c *gin.Context) {
 	if err == nil {
 		var item T
 		self.Db.First(&item, id)
-		rnd.HxRender(c, gin.H{self.ModelName: item}, template)
+		rnd.Render(c, gin.H{self.ModelName: item}, template)
 	} else {
 		c.Error(err)
 		c.String(http.StatusBadRequest, fmt.Sprintf("Invalid ID for %s: %d", self.ModelName, id))
@@ -79,14 +79,14 @@ func (self *CrudCtrl[T]) EditForm(c *gin.Context) {
 	template := fmt.Sprintf("%s-edit.html", self.ModelName)
 	idStr := c.Param("id")
 	if idStr == "" {
-		rnd.HxRender(c, gin.H{}, template)
+		rnd.Render(c, gin.H{}, template)
 		return
 	} else {
 		id, err := strconv.ParseUint(idStr, 10, 64)
 		if err == nil {
 			var item T
 			self.Db.First(&item, idStr)
-			rnd.HxRender(c, gin.H{self.ModelName: item}, template)
+			rnd.Render(c, gin.H{self.ModelName: item}, template)
 		} else {
 			c.Error(err)
 			c.String(http.StatusBadRequest, fmt.Sprintf("Invalid ID for %s: %d", self.ModelName, id))

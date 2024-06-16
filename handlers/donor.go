@@ -36,14 +36,14 @@ func (self *DonorController) ListDonors(c *gin.Context) {
     self.db.Find(&donors)
 
     // c.HTML(http.StatusOK, "donors-list.html", gin.H{"Donors": donors})
-	rnd.HxRender(c, gin.H{"Donors": donors}, "donors-list.html")
+	rnd.Render(c, gin.H{"Donors": donors}, "donors-list.html")
 }
 
 func (self *DonorController) ShowDonorDetails(c *gin.Context) {
 	if id, err := strconv.ParseUint(c.Param("id"), 10, 64); err == nil {
 		var donor models.Donor
 		self.db.First(&donor, id)
-		rnd.HxRender(c, gin.H{"Donor": donor}, "donor.html")
+		rnd.Render(c, gin.H{"Donor": donor}, "donor.html")
 	} else {
 		c.Error(err)
 		c.String(http.StatusBadRequest, fmt.Sprintf("Invalid ID: %d", id))
@@ -52,12 +52,12 @@ func (self *DonorController) ShowDonorDetails(c *gin.Context) {
 
 func (self *DonorController) ShowDonorForm(c *gin.Context) {
 	if idStr := c.Param("id"); idStr == "" {
-		rnd.HxRender(c, gin.H{}, "edit-donor.html")
+		rnd.Render(c, gin.H{}, "edit-donor.html")
 		return
 	} else if id, err := strconv.ParseUint(idStr, 10, 64); err == nil {
 		var donor models.Donor
 		self.db.First(&donor, idStr)
-		rnd.HxRender(c, gin.H{"Donor": donor}, "edit-donor.html")
+		rnd.Render(c, gin.H{"Donor": donor}, "edit-donor.html")
 	} else {
 		c.Error(err)
 		c.String(http.StatusBadRequest, fmt.Sprintf("Invalid ID: %d", id))
