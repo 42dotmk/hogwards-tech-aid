@@ -1,0 +1,20 @@
+<button hx-get="/team/new" hx-target="#main" hx-push-url="true"> New </button>
+{{range .repairmanList}}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{.Name}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{.Email}}</h6>
+        <p class="card-text">{{.Phone}}</p>
+        <p class="card-text">{{.Address}}</p>
+        <div>
+            <button hx-get="/team/{{.ID}}" hx-target="#main" hx-push-url="true"> View </button>
+            <button hx-get="/team/{{.ID}}/edit" hx-target="#main" hx-push-url="true"> Edit </button>
+            <button hx-delete="/team/{{.ID}}" hx-confirm="Are you sure?" hx-target="#main" hx-push-url="true"> Delete </button>
+        </div>
+    </div>
+</div>
+{{else}}
+<div class="alert alert-warning" role="alert">
+    No team exists yet, add one please!
+</div>
+{{end}}

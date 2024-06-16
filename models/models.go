@@ -1,10 +1,27 @@
 package models
 
 import "gorm.io/gorm"
-import "app/db"
+import "github.com/42dotmk/hogwards/db"
+
+type IModel interface{
+    GetID() uint
+    SetID(id uint)
+}
+
+func (self BaseModel) GetID() uint{
+    return self.ID
+}
+
+func (self BaseModel) SetID(id uint) {
+    self.ID = id
+}
+
+type BaseModel struct{
+	gorm.Model
+}
 
 type Repairman struct {
-	gorm.Model
+	BaseModel
 	Name     string
 	Password string
 	Phone    string
@@ -14,7 +31,7 @@ type Repairman struct {
 }
 
 type Donor struct {
-	gorm.Model
+	BaseModel
 	Name          string
 	Phone         string
 	Email         string
@@ -23,12 +40,12 @@ type Donor struct {
 	IsLegalEntity bool
 	AnonymousName string
 
-	Items     []EquipmentItem //`gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 	Donations []Donation
+	Items     []EquipmentItem //`gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 }
 
 type Donation struct {
-	gorm.Model
+	BaseModel
 	DonorID uint
 	Donor   Donor
 	Date    string `gorm:"autoCreateTime"`
@@ -37,7 +54,7 @@ type Donation struct {
 }
 
 type EquipmentItem struct {
-	gorm.Model
+	BaseModel
 	Name        string
 	Description string
 	Category    string
@@ -56,13 +73,14 @@ type EquipmentItem struct {
 }
 
 type Tag struct {
+    BaseModel
 	Code            string `gorm:"primaryKey"`
 	Name            string
 	Description     string
 }
 
 type Recipient struct {
-	gorm.Model
+	BaseModel
 	Name          string
 	Phone         string
 	Email         string
@@ -74,7 +92,7 @@ type Recipient struct {
 }
 
 type ServicedMachine struct {
-	gorm.Model
+	BaseModel
 	SerialNumber string `gorm:"unique"`
 	Status       ServiceStatus
 
@@ -96,7 +114,7 @@ const (
 )
 
 type ServiceComment struct {
-	gorm.Model
+	BaseModel
 	Comment string
 
 	PersonID uint

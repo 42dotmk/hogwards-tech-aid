@@ -1,8 +1,6 @@
-module app
+module github.com/42dotmk/hogwards
 
 go 1.22
-
-// +heroku goVersion go1.18
 
 require (
 	github.com/gin-gonic/gin v1.7.7

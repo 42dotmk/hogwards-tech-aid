@@ -1,0 +1,21 @@
+export URI=http://localhost:3000
+export DONORS=$URI/donors
+export TEAM=$URI/team
+
+httpie
+
+http get $URI
+
+http get $DONORS
+
+http get $DONORS/1
+
+
+http get $DONORS/new HX-Request:true
+
+open $DONORS
+
+
+http get $TEAM/ HX-Request:true
+
+http -f put $TEAM/ HX-Request:true Name="Costa" Address="Karposeva"

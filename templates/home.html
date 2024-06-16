@@ -1,53 +1,9 @@
 {{ template "header.html" .}}
-<main class="mx-auto h-full max-w-xl px-3 w-full flex-grow">
+<main class="h-full max-w-xl px-3 w-full flex-grow">
     <section class="flex flex-col text-center py-5">
         <h1 class="font-black">Донирај компјутер</h1>
     </section>
-
-    <button class="justify-center p-5 mb-2 mr-2 overflow-hidden text-xl font-medium text-gray-900 rounded bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
-        hx-get="/donors" hx-target="#main" hx-push-url="true">
-       Донори
-    </button>
-
-    <button class="justify-center p-5 mb-2 mr-2 overflow-hidden text-xl font-medium text-gray-900 rounded bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
-        hx-get="/donations" hx-target="#main" hx-push-url="true">
-        Донации
-    </button>
-
-    <button class="justify-center p-5 mb-2 mr-2 overflow-hidden text-xl font-medium text-gray-900 rounded bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
-        hx-get="/inventory" hx-target="#main" hx-push-url="true">
-        Опрема
-    </button>
-    <button class="justify-center p-5 mb-2 mr-2 overflow-hidden text-xl font-medium text-gray-900 rounded bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
-        hx-get="/configurations" hx-target="#main" hx-push-url="true">
-        Конфигурации
-    </button>
-    <button class="justify-center p-5 mb-2 mr-2 overflow-hidden text-xl font-medium text-gray-900 rounded bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
-        hx-get="/team" hx-target="#main" hx-push-url="true">
-        Екипа
-    </button>
-      <section id="main">
-        {{if .Donor}}
-            {{template "donor.html" .}}
-        {{end}}
-        {{if .Donors}}
-          {{template "donors-list.html" .}}
-        {{end}}
-        {{if .Donations}}
-          {{template "donations-list.html" .}}
-        {{end}}
-        {{if .Inventory}}
-          {{template "inventory-list.html" .}}
-        {{end}}
-        {{if .Configurations}}
-          {{template "configurations-list.html" .}}
-        {{end}}
-        {{if .Configuration}}
-          {{template "configuration.html" .}}
-        {{end}}
-        {{if .Team}}
-          {{template "team.html" .}}
-        {{end}}
-      </section>
+{{template "menu.html" .}}
+{{template "main.html" .}}
 </main>
 {{ template "footer.html" .}}

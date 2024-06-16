@@ -10,7 +10,7 @@ import (
 )
 
 // DB SERVER CONN STR
-func sqlite_conn_str() string {
+func GetEnvConnStringOrDefault() string {
 	dbPath, isFound := os.LookupEnv("DB_PATH")
 	if !isFound {
 		dbPath = "db.sqlite"
@@ -21,7 +21,7 @@ func sqlite_conn_str() string {
 var DB = func() (db *gorm.DB) {
 
 	godotenv.Load()
-	if db, err := gorm.Open(dbServer.Open(sqlite_conn_str()), &gorm.Config{}); err != nil {
+	if db, err := gorm.Open(dbServer.Open(GetEnvConnStringOrDefault()), &gorm.Config{}); err != nil {
 		fmt.Println("Connection to database failed", err)
 		panic(err)
 	} else {

@@ -1,0 +1,23 @@
+<section id="main">
+{{if .Donor}}
+    {{template "donor.html" .}}
+{{end}}
+{{if .Donors}}
+  {{template "donors-list.html" .}}
+{{end}}
+{{if .Donations}}
+  {{template "donations-list.html" .}}
+{{end}}
+{{if .Inventory}}
+  {{template "inventory-list.html" .}}
+{{end}}
+{{if .Configurations}}
+  {{template "configurations-list.html" .}}
+{{end}}
+{{if .Configuration}}
+  {{template "configuration.html" .}}
+{{end}}
+{{if .Team}}
+  {{template "team.html" .}}
+{{end}}
+</section>
