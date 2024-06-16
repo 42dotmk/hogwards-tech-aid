@@ -5,8 +5,8 @@ import (
 	"net/http"
 )
 
-// Config is used to configure the Htmx renderer and set the default layout and layout data function to use
-// This config is than used by the HxRender and HxRenderWithLayout functions to render the templates
+// Config is used to configure the renderer and set the default layout and layout data function to use
+// This config is than used by the Render function to render the data with the correct layout and data
 type Config struct {
     //the layout to use on the templates for full page rendering
 	DefaultLayout              string
@@ -37,7 +37,7 @@ func (c *Config) WithEnableLayoutOnNonHxRequest(enableLayoutOnNonHxRequest bool)
     return c
 }
 
-// DefaulHxConfig returns a new HxConfig with the default values
+// NewConfig returns a new renderer Config with the default values
 func NewConfig() *Config {
 	return &Config{
 		DefaultLayout:              "index.html",
@@ -46,10 +46,10 @@ func NewConfig() *Config {
 	}
 }
 
-
+// config is the default configuration for the Render function
 var config = NewConfig()
 
-// sets the default configuration for the HxRender function
+// sets the default configuration for the Render function
 func DefaultRenderSetup(options *Config) {
 	if options.DefaultLayout != "" {
 		config.DefaultLayout = options.DefaultLayout
@@ -67,14 +67,14 @@ func DefaultRenderSetup(options *Config) {
 // If the request is not an Htmx request it will use the layout to render the data
 //  - The layout should be aware of the data that is passed to it and conditionally render that template
 // it uses the default hxConfig to render the template
-// see HxRenderWithLayout for more control over the rendering
+// See `RenderWithConfig` for more control over the rendering
 func Render(c *gin.Context, data gin.H, templateName string) {
 	hxAwareRender(c, data, templateName, config.DefaultLayout, config)
 }
 
-// HxRenderWithLayout is a function that renders a template with the given data and the render configuration
-// See HxRender for more information on the rendering
-// See HxConfig for more information on the configuration
+// RenderWithConfig is a function that renders a template with the given data and the render configuration
+// See Render for more information on the rendering
+// See Config for more information on the configuration
 func RenderWithConfig(c *gin.Context, data gin.H, templateName string, conf *Config) {
 	hxAwareRender(c, data, templateName, config.DefaultLayout, conf)
 }

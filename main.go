@@ -18,7 +18,7 @@ func main() {
 	app.LoadHTMLGlob("templates/*")
 
 	// Setup the Htmx renderer defaults
-	hxConfig := renderers.NewConfig().
+	config := renderers.NewConfig().
 		WithLayout("home.html"). //the default layout to use
 		WithEnableLayoutOnNonHxRequest(true). 
 		//a function that is used to supply the layout with data, in this case the menu items
@@ -32,7 +32,7 @@ func main() {
 				{Title: "Конфигурации", Uri: "/bundles", IsEnabled: true, IsExternal: false},
 			}
 		})
-	renderers.DefaultRenderSetup(hxConfig)
+	renderers.DefaultRenderSetup(config)
 
 	//HANDLERS
 	//V0 just create a simple method handler for a simple route (the method can be pased as an argument it does not have to be a closure)
