@@ -5,7 +5,6 @@ go 1.22
 require (
 	github.com/gin-gonic/gin v1.7.7
 	github.com/joho/godotenv v1.5.1
-	github.com/ulule/limiter/v3 v3.10.0
 	gorm.io/driver/sqlite v1.5.5
 	gorm.io/gorm v1.25.10
 )
