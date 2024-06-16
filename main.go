@@ -67,5 +67,6 @@ func main() {
 	app.GET("/recipients", recepients.List)
 
 	// v2.3 Or you can have a custom implementation of the CRUD controller
+
 	app.Run()
 }

@@ -13,15 +13,6 @@ type MenuItem struct {
 }
 
 var DefaultLayoutDataFunc = func(data gin.H) {
-	data["Menu"] = []MenuItem{
-		{"Home", "/", true, true},
-		{"Донори", "/donors", true, false}, 
-		{"Донации", "/donations", true, false}, 
-		{"Тим", "/team", true, false}, 
-		{"Опрема", "/equipment", true, false}, 
-		{"Конфигурации", "/bundles", true, false}, 
-		{"Приматели", "/recepients", true, false}, 
-	}
 }
 
 type HxConfig struct {
@@ -34,7 +25,7 @@ var hxConfig = DefaulHxConfig()
 
 func DefaulHxConfig() *HxConfig {
 	return &HxConfig{
-		DefaultLayout:              "home.html",
+		DefaultLayout:              "index.html",
 		LayoutDataFunc:             DefaultLayoutDataFunc,
 		EnableLayoutOnNonHxRequest: true,
 	}
