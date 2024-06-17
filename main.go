@@ -14,20 +14,27 @@ import (
 )
 
 func main() {
-	db := db.Connect()
-	models.Migrate(db) // auto migrate the models
+	godotenv.Load() // load the .env file
 
-	app := setupApp()
-	setRoutes(app, db)
+	db := db.Connect()
+	models.Migrate(db) // auto migrate the models and set the database
+
+	app := setupApp() // create the gin app and setup defaults
+	registerRoutes(app, db) // register the routes
+
+    setupDefaultRenderer()
+
 	app.Run()
 }
 
 func setupApp() (app *gin.Engine) {
-	godotenv.Load()
 	app = gin.Default()
 	app.Static("/assets", "./assets")
 	app.LoadHTMLGlob("templates/*")
+	return app
+}
 
+func setupDefaultRenderer(){
 	config := renderers.NewConfig().
 		WithLayout("home.html").
 		WithEnableLayoutOnNonHxRequest(true).
@@ -42,9 +49,8 @@ func setupApp() (app *gin.Engine) {
 			}
 		})
 	renderers.DefaultRenderSetup(config)
-	return app
 }
-func setRoutes(app *gin.Engine, db *gorm.DB) {
+func registerRoutes(app *gin.Engine, db *gorm.DB) {
 
 	//V0 just create a simple method handler for a simple route (the method can be pased as an argument it does not have to be a closure)
 	app.GET("/", func(c *gin.Context) { renderers.Render(c, gin.H{}, "home.html") })
