@@ -5,7 +5,7 @@ import (
 
 	"github.com/42dotmk/hogwards/db"
 	"github.com/42dotmk/hogwards/handlers"
-	"github.com/42dotmk/hogwards/handlers/crud"
+	"github.com/42dotmk/hogwards/lib/crud"
 	"github.com/42dotmk/hogwards/lib/renderers"
 	"github.com/42dotmk/hogwards/models"
 	"github.com/gin-gonic/gin"
@@ -19,10 +19,10 @@ func main() {
 	db := db.Connect()
 	models.Migrate(db) // auto migrate the models and set the database
 
-	app := setupApp() // create the gin app and setup defaults
+	app := setupApp()       // create the gin app and setup defaults
 	registerRoutes(app, db) // register the routes
 
-    setupDefaultRenderer()
+	setupDefaultRenderer()
 
 	app.Run()
 }
@@ -34,7 +34,7 @@ func setupApp() (app *gin.Engine) {
 	return app
 }
 
-func setupDefaultRenderer(){
+func setupDefaultRenderer() {
 	config := renderers.NewConfig().
 		WithLayout("home.html").
 		WithEnableLayoutOnNonHxRequest(true).
@@ -72,14 +72,14 @@ func registerRoutes(app *gin.Engine, db *gorm.DB) {
 	crud.New[models.Repairman](db).
 		OnRouter(app.Group("/team")).
 		WithFormBinder(func(c *gin.Context, out *models.Repairman) error {
-            idStr:=c.Param("ID")
-            if idStr!=""{
-                id, err:=strconv.Atoi(idStr)
-                if err!=nil{
-                    return err
-                }
-                out.ID = uint(id)
-            }
+			idStr := c.Param("ID")
+			if idStr != "" {
+				id, err := strconv.Atoi(idStr)
+				if err != nil {
+					return err
+				}
+				out.ID = uint(id)
+			}
 			out.Name = c.PostForm("Name")
 			out.Phone = c.PostForm("Phone")
 			out.Email = c.PostForm("Email")
