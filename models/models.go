@@ -1,22 +1,26 @@
 package models
 
 import "gorm.io/gorm"
-import "github.com/42dotmk/hogwards/db"
 
-type IModel interface{
-    GetID() uint
-    SetID(id uint)
+// Ensures that the models and the tables are in sync with taking the models as a baseline
+func Migrate(db *gorm.DB) {
+	db.AutoMigrate(&Repairman{}, &Donor{}, &Recipient{}, &EquipmentItem{}, &Tag{}, &ServicedMachine{}, &ServiceComment{})
 }
 
-func (self BaseModel) GetID() uint{
-    return self.ID
+type IModel interface {
+	GetID() uint
+	SetID(id uint)
+}
+
+func (self BaseModel) GetID() uint {
+	return self.ID
 }
 
 func (self BaseModel) SetID(id uint) {
-    self.ID = id
+	self.ID = id
 }
 
-type BaseModel struct{
+type BaseModel struct {
 	gorm.Model
 }
 
@@ -69,14 +73,14 @@ type EquipmentItem struct {
 	ServicedMachineID uint
 	ServicedMachine   ServicedMachine
 
-    Tags []Tag `gorm:"many2many:equipment_tags;"`
+	Tags []Tag `gorm:"many2many:equipment_tags;"`
 }
 
 type Tag struct {
-    BaseModel
-	Code            string `gorm:"primaryKey"`
-	Name            string
-	Description     string
+	BaseModel
+	Code        string `gorm:"primaryKey"`
+	Name        string
+	Description string
 }
 
 type Recipient struct {
@@ -124,6 +128,3 @@ type ServiceComment struct {
 	ServicedMachine   ServicedMachine
 }
 
-func Migrate() {
-	db.DB.AutoMigrate(&Repairman{}, &Donor{}, &Recipient{}, &EquipmentItem{}, &Tag{}, &ServicedMachine{}, &ServiceComment{})
-}

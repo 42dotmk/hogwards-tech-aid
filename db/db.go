@@ -3,9 +3,7 @@ package db
 import (
 	"fmt"
 	"os"
-
-	"github.com/joho/godotenv"
-	dbServer "gorm.io/driver/sqlite"
+	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
@@ -18,14 +16,14 @@ func GetEnvConnStringOrDefault() string {
 	return dbPath
 }
 
-var DB = func() (db *gorm.DB) {
 
-	godotenv.Load()
-	if db, err := gorm.Open(dbServer.Open(GetEnvConnStringOrDefault()), &gorm.Config{}); err != nil {
+
+func Connect() (db *gorm.DB) {
+	if db, err := gorm.Open(sqlite.Open(GetEnvConnStringOrDefault()), &gorm.Config{}); err != nil {
 		fmt.Println("Connection to database failed", err)
 		panic(err)
 	} else {
 		fmt.Println("Connected to database")
 		return db
 	}
-}()
+}
