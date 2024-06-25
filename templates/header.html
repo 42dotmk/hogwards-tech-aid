@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
 
     <!-- packages -->
+    <script src="/assets/scripts/wand_effect.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://unpkg.com/htmx.org@1.7.0"
@@ -28,24 +29,40 @@
         }
 
         .unselectable {
-            -webkit-user-select: none; /* Safari */
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* IE10+/Edge */
-            user-select: none; /* Standard */
+            -webkit-user-select: none;
+            /* Safari */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* IE10+/Edge */
+            user-select: none;
+            /* Standard */
         }
 
         .button {
             background-color: #740001;
             color: #D3A625;
         }
+
         .button:hover {
             color: #FFD800;
         }
+
         body {
             background-color: #946B2D;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: #FFD833;
+            border-radius: 50%;
+            pointer-events: none;
+            transition: transform 0.2s, opacity 0.2s;
         }
     </style>
-
 </head>
 
 <body class="w-screen min-h-screen h-full flex flex-col">
