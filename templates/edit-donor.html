@@ -1,4 +1,4 @@
-<form class="border border-gray-200 p-6 rounded-md space-y-6"
+<form class="p-6 rounded-md space-y-6 mx-[10%]"
     {{if .Donor}}
         hx-post="/donors/{{.Donor.ID}}"
     {{else}}
@@ -51,6 +51,6 @@
         <input type="text" name="AnonymousName" id="anonymousName" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             {{if .Donor.AnonymousName}} value="{{.Donor.AnonymousName}}" {{end}}>
     </div>
-    <button type="submit" class="w-full px-4 py-2 bg-indigo-600 text-white font-medium rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Submit</button>
+    <button type="submit" class="button w-full px-4 py-2 text-white font-medium rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Submit</button>
 </form>
 

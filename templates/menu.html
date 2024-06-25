@@ -1,29 +1,25 @@
 {{/* this is a partial template */}}
 {{/* it is included in the main template*/}}
-<div id="menu" class="flex flex-row my-5 justify-center w-full rounded-lg">
+<div id="menu" class="flex flex-col md:flex-row justify-center w-full">
     {{range .Menu}}{{if .IsEnabled}}
     {{if .IsExternal}}
     <a class="
+              flex
+              justify-center
               button
               unselectable
-              rounded-lg
-              flex
               p-3
-              mr-1
-              overflow-hidden
               text-2xl
               font-bold
-              dark:text-white
-              dark:focus:ring-blue-800" href="{{.Uri}}" hx-disable="true">
+              " href="{{.Uri}}" hx-disable="true">
         {{.Title}}
     </a>
     {{else}}
     <button class="justify-center
-               rounded-lg
                button
                unselectable
                p-3
-               mr-1
+               border-l-2
                overflow-hidden
                text-2xl
                font-bold
