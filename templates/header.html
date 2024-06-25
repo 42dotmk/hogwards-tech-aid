@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 
-  <head>
+<head>
     <!--Use the title variable to set the title of the page-->
     <title>{{ .title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,8 +10,42 @@
     <!-- packages -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://unpkg.com/htmx.org@1.7.0" integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous" defer></script>
+    <script src="https://unpkg.com/htmx.org@1.7.0"
+        integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous"
+        defer></script>
 
-  </head>
 
-  <body class="bg-gray-300 w-screen min-h-screen h-full flex flex-col">
+    <!-- TODO (ivche): use tailwind config instead-->
+    <style>
+        @font-face {
+            font-family: 'HarryPotter';
+            src: url('/assets/fonts/harry-potter.ttf') format('truetype');
+        }
+
+        .font-HarryPotter {
+            font-family: 'HarryPotter';
+            color: #740001;
+        }
+
+        .unselectable {
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+        }
+
+        .button {
+            background-color: #740001;
+            color: #D3A625;
+        }
+        .button:hover {
+            color: #FFD800;
+        }
+        body {
+            background-color: #946B2D;
+        }
+    </style>
+
+</head>
+
+<body class="w-screen min-h-screen h-full flex flex-col">

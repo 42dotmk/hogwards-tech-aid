@@ -4,7 +4,7 @@ import "gorm.io/gorm"
 
 // Ensures that the models and the tables are in sync with taking the models as a baseline
 func Migrate(db *gorm.DB) {
-	db.AutoMigrate(&Repairman{}, &Donor{}, &Recipient{}, &EquipmentItem{}, &Tag{}, &ServicedMachine{}, &ServiceComment{})
+	db.AutoMigrate(&Repairman{}, &Donor{}, &Recipient{}, &InventoryItem{}, &Tag{}, &ServicedMachine{}, &ServiceComment{})
 }
 
 type IModel interface {
@@ -45,7 +45,7 @@ type Donor struct {
 	AnonymousName string
 
 	Donations []Donation
-	Items     []EquipmentItem //`gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Items     []InventoryItem //`gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 }
 
 type Donation struct {
@@ -54,10 +54,10 @@ type Donation struct {
 	Donor   Donor
 	Date    string `gorm:"autoCreateTime"`
 
-	Equipment []EquipmentItem //`gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Inventory []InventoryItem //`gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 }
 
-type EquipmentItem struct {
+type InventoryItem struct {
 	BaseModel
 	Name        string
 	Description string
@@ -103,7 +103,7 @@ type ServicedMachine struct {
 	RecipientID uint
 	Recipient   Recipient
 
-	Equipment []EquipmentItem
+	Inventory []InventoryItem
 	Comments  []ServiceComment `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 }
 

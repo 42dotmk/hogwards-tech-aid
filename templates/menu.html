@@ -1,41 +1,31 @@
 {{/* this is a partial template */}}
 {{/* it is included in the main template*/}}
-<div id="menu" class="flex flex-row my-5 justify-center w-full">
+<div id="menu" class="flex flex-row my-5 justify-center w-full rounded-lg">
     {{range .Menu}}{{if .IsEnabled}}
     {{if .IsExternal}}
     <a class="
+              button
+              rounded-lg
               flex
-              justify-center
               p-3
-              mb-2
-              mr-2
+              mr-1
               overflow-hidden
-              text-xl
+              text-2xl
               font-bold
-              text-gray-900
-              rounded
-              group-hover:from-purple-600
-              group-hover:to-blue-500
-              hover:text-white
               dark:text-white
               dark:focus:ring-blue-800" href="{{.Uri}}" hx-disable="true">
         {{.Title}}
     </a>
     {{else}}
     <button class="justify-center
+               rounded-lg
+               button
                p-3
-               mb-2
-               mr-2
+               mr-1
                overflow-hidden
-               text-xl
+               text-2xl
                font-bold
-               text-gray-900
-               rounded
-               group-hover:from-purple-600
-               group-hover:to-blue-500
-               hover:text-white
-               dark:text-white
-               dark:focus:ring-blue-800" hx-get='{{.Uri}}' hx-target="#main" hx-push-url="true">
+               " hx-get='{{.Uri}}' hx-target="#main" hx-push-url="true">
         {{.Title}}
     </button>
     {{end}}
