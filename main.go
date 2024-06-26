@@ -40,11 +40,11 @@ func setupDefaultRenderer() {
 		WithEnableLayoutOnNonHxRequest(true).
 		WithLayoutDataFunc(func(data gin.H) {
 			data["Menu"] = []models.MenuItem{
-				{Title: "Home", Uri: "/", IsEnabled: true, IsExternal: true},
+				{Title: "Дома", Uri: "/", IsEnabled: true, IsExternal: true},
 				{Title: "Донори", Uri: "/donors", IsEnabled: true, IsExternal: false},
 				{Title: "Донации", Uri: "/donations", IsEnabled: true, IsExternal: false},
 				{Title: "Тим", Uri: "/team", IsEnabled: true, IsExternal: false},
-				{Title: "Опрема", Uri: "/equipment", IsEnabled: true, IsExternal: false},
+				{Title: "Опрема", Uri: "/inventory", IsEnabled: true, IsExternal: false},
 				{Title: "Конфигурации", Uri: "/bundles", IsEnabled: true, IsExternal: false},
 			}
 		})
